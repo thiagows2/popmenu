@@ -2,10 +2,9 @@
 
 require 'rails_helper'
 
-RSpec.describe Menu do
+RSpec.describe Restaurant do
   describe 'associations' do
-    it { is_expected.to have_many(:menu_item_menus).dependent(:destroy) }
-    it { is_expected.to have_many(:menu_items).through(:menu_item_menus) }
+    it { is_expected.to have_many(:menus).dependent(:destroy) }
   end
 
   describe 'validations' do

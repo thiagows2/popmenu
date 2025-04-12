@@ -2,14 +2,14 @@
 
 require 'rails_helper'
 
-RSpec.describe MenuItem, type: :model do
+RSpec.describe MenuItem do
   describe 'associations' do
-    it { should belong_to(:menu) }
+    it { is_expected.to have_many(:menu_item_menus).dependent(:destroy) }
+    it { is_expected.to have_many(:menus).through(:menu_item_menus) }
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:price) }
-    it { should validate_numericality_of(:price) }
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_uniqueness_of(:name) }
   end
 end

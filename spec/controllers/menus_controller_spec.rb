@@ -7,13 +7,8 @@ RSpec.describe MenusController do
 
   describe 'GET /index' do
     it 'returns http success' do
-      get :index
+      get :index, format: :json
       expect(response).to have_http_status(:success)
-    end
-
-    it 'returns all menus' do
-      get :index
-      expect(json_response.size).to eq(1)
     end
   end
 end

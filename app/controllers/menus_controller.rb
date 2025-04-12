@@ -2,6 +2,6 @@
 
 class MenusController < ApplicationController
   def index
-    render json: Menu.includes(:menu_items)
+    @menus = Menu.includes(:restaurant, menu_item_menus: :menu_item)
   end
 end

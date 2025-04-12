@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class MenuItem < ApplicationRecord
-  belongs_to :menu
+  has_many :menu_item_menus, dependent: :destroy
+  has_many :menus, through: :menu_item_menus
 
-  validates :name, presence: true
-  validates :price, presence: true, numericality: true
+  validates :name, presence: true, uniqueness: { case_sensitive: true }
 end
