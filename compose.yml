@@ -4,8 +4,6 @@ services:
     container_name: db
     environment:
       MYSQL_DATABASE: popmenu_development
-      MYSQL_USER: rails
-      MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
     ports:
       - "3306:3306"
@@ -18,7 +16,7 @@ services:
     environment:
       RAILS_ENV: development
       DB_HOST: db
-      DB_USER: rails
+      DB_USER: root
       DB_PASSWORD: secret
     volumes:
       - .:/app
