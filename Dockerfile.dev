@@ -1,0 +1,33 @@
+# syntax=docker/dockerfile:1
+
+ARG RUBY_VERSION=3.4.2
+ARG BUNDLE_VERSION=2.5.16
+FROM ruby:$RUBY_VERSION-slim
+
+WORKDIR /app
+
+ENV BUNDLE_VERSION=$BUNDLE_VERSION \
+  LANG=C.UTF-8 \
+  TZ=America/Sao_Paulo \
+  RAILS_ENV=development \
+  BUNDLER_VERSION=$BUNDLE_VERSION
+
+RUN apt-get update -qq && \
+  apt-get install --no-install-recommends -y \
+  build-essential \
+  default-libmysqlclient-dev \
+  git \
+  nodejs \
+  yarn \
+  libyaml-dev \
+  tzdata && \
+  gem install bundler -v "$BUNDLE_VERSION" && \
+  rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
+
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
+COPY . .
+
+EXPOSE 3000
+CMD ["bin/rails", "server", "-b", "0.0.0.0"]
