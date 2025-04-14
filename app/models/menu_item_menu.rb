@@ -6,5 +6,5 @@ class MenuItemMenu < ApplicationRecord
   belongs_to :menu
   belongs_to :menu_item
 
-  validates :price, presence: true, numericality: true
+  validates :price, presence: true, numericality: { greater_than: 0 }
 end
